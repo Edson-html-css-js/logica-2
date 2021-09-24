@@ -1,0 +1,50 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+var tela = document.querySelector('canvas');
+var pincel = tela.getContext('2d');
+pincel.filStyle = 'white';   // estou passando a cor da loza onde pode ser pintada pelo pincel
+pincel.fillRect(0, 0, 600, 400);    // estou passando o tamanho da loza onde pode escrever
+
+function desenhaCirculo(x, y, raio) { // parametros que eu quero na funcao
+    pincel.fillStyle = 'blue'; // estoun falando a cor que eu quero pro pincel
+    pincel.beginPath(); // para eu comecar a dezenhar, sem isso ele não escreve na tela
+    pincel.arc(x, y, raio, 0, 2 * Math.PI); // pra eu poder dezenhar meu circulo    
+    pincel.fill(); // para mostra o circulo na tela
+
+}
+
+    function linpaTela() {
+
+        pincel.clearRect(0, 0, 600, 400);  //pinpa a bolinha que foi dezenhada anteriormente
+    }
+
+    var x = 10;
+
+    var x2 = 600;
+   function atualizaTela() {
+    
+    if(x <= 600){
+
+        linpaTela()
+        desenhaCirculo(x, 20, 10);
+        x++
+
+    }else if(x2 <=600){
+        
+    linpaTela()
+    desenhaCirculo(x2, 100, 10);
+        x2--;
+
+    }
+       
+   
+   }
+
+   
+   setInterval(atualizaTela, 7);
+
+   //setInterval(circuloReverso, 10); //essa é uma função que chama no console,de segundo en segundo, que voçê mandar depois da , ouseja 1000 é igual a 1 segundo
+ //quando queremos passar uma função como parametro pra outra função tiramos os ().
+ 
+</script>

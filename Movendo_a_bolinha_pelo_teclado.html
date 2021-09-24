@@ -1,0 +1,66 @@
+ <canvas width="600" height="400"></canvas>
+
+<script>
+
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+    pincel.fillStyle = 'lightgray';
+    pincel.fillRect(0, 0, 600, 400);
+
+    var x = 20;
+    var y = 20;
+
+    //codigos do teclado, setas
+
+    var esquerda = 37;
+    var cima = 38;
+    var direita = 39;
+    var baixo = 40;
+
+    //taxa de incremento, quando o usuario precionar as setas, o codigo tenha uma reação
+    var taxa = 10;
+
+    function desenhaCirculo(x, y, raio) {
+
+        pincel.fillStyle = 'blue';
+        pincel.beginPath();
+        pincel.arc(x, y, raio, 0, 2 * Math.PI);
+        pincel.fill();
+    }
+
+    function limpaTela() {
+
+        pincel.clearRect(0, 0, 600, 400);
+    }
+
+    function atualizaTela() {
+
+        limpaTela();
+        desenhaCirculo(x, y, 10);
+    }
+
+
+    setInterval(atualizaTela, 20);
+
+
+    function leDoTeclado(evento){
+
+        if(evento.keyCode == cima){// keyCode é pra ele pegar o evento de o usuario apertar a seta pra cima,se apertar tira 10 da var y
+            y = y -taxa;
+            
+        }else if(evento.keyCode == baixo){//se apertar seta pra baixo, adicione 10 en 10 a cada aperto á var y
+            y = y + taxa;
+
+        }else if(evento.keyCode == esquerda){//se apertar a seta pra esquerda subtraia 10 en 10 a cada aperto da var x,
+            x = x - taxa;
+
+        }else if(evento.keyCode == direita){//se apertar a seta pra direita adicione 10 en 10 a cada aperto da var x,
+            x = x + taxa;
+        }  
+        
+    }
+
+    document.onkeydown = leDoTeclado;// essa fução do java script retorna o que o usuario esta apertando no teclado!
+
+</script> 
+

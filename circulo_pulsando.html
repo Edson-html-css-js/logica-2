@@ -1,0 +1,53 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+    pincel.fillStyle = 'lightgray';
+    pincel.fillRect(0, 0, 600, 400);
+
+    function desenhaCirculo(x, y, raio, cor) {
+
+        pincel.fillStyle = cor;
+        pincel.beginPath();
+        pincel.arc(x, y, raio, 0, 2 * Math.PI);
+        pincel.fill();
+    }
+
+    function limpaTela() {
+
+        pincel.clearRect(0, 0, 600, 400);
+    }
+
+    var raio = 19;
+
+    var fatorCrescimento = 0;
+
+   function atualizaTela() {
+    
+        
+        limpaTela();
+
+        
+        if (raio > 30) { // enquanto raio for maior que 30, que é o tamanho do circulo, acresente -1 
+
+            fatorCrescimento =  -1;
+
+        }else if(raio < 20){// se raio for menor que 20, adicione +1 
+
+            fatorCrescimento = + 1;
+        }
+
+        raio = raio + fatorCrescimento;// aqui esta falando pra somar raio que é 19 + o que vir da variavel fatorCrescimento que pode ser -1 ou +1 dependendo da execução dos if e else!
+
+    desenhaCirculo(300, 200, raio, 'red');
+}
+    
+       
+   
+
+    setInterval(atualizaTela, 20);
+
+
+</script>

@@ -1,0 +1,44 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+
+    pincel.fillStyle = 'grey';
+    pincel.fillRect(0, 0, 600, 400);
+
+    var raio = 10;  // com a var aqui fora da função, toda vez que precionar o shift, ele add 10 ao raio, e se manten add o quanto for precionado!
+
+    
+    
+    function desenhaCirculo(evento) {
+
+        var x = evento.pageX - tela.offsetLeft;
+        var y = evento.pageY - tela.offsetTop;
+      
+        //var raio = 10;  // com a variavel dentro da função, ele acresenta 10 só precionado o shift, quando não preciona ele não acresenta!
+        console.log(x + ',' + y);
+
+        
+        if(evento.shiftKey && evento.altkey){
+
+            alert('Só aperte uma tecla por vez, por favor!');
+
+
+        }else if(evento.shiftKey && raio + 10 <= 40){
+            raio = raio +10;  
+
+        }else if(evento.altkey && raio - 5 >= 10){
+            raio = raio -5;
+        }
+          
+        pincel.fillStyle = 'blue';
+        pincel.beginPath();
+        pincel.arc(x, y, raio, 0, 2 * 3.14);
+        pincel.fill();
+
+    }
+
+    tela.onclick = desenhaCirculo;
+
+</script>

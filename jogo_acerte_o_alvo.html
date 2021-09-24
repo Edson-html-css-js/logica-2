@@ -1,0 +1,71 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+    pincel.fillStyle = 'lightgray';
+    pincel.fillRect(0, 0, 600, 400);
+
+    function desenhaCirculo(x, y, raio, cor) {
+
+        pincel.fillStyle = cor;
+        pincel.beginPath();
+        pincel.arc(x, y, raio, 0, 2 * Math.PI);
+        pincel.fill();
+    }
+
+    function limpaTela() {
+
+        pincel.clearRect(0, 0, 600, 400);
+    }
+
+    var raio = 10;
+    var xAleatorio; //declaramos as variaveis fora da funcao, para que ela possa ser assesada de qualquer lugar
+    var yAleatorio;
+
+    function desenhaAlvo(x, y){
+
+    desenhaCirculo(x, y, raio+20, 'red');
+    desenhaCirculo(x, y, raio+10, 'white');
+    desenhaCirculo(x, y, raio, 'red');
+    
+
+    }
+
+    function sorteiaPosicao(maximo){//essa funcao recebe o maximo que o math.random pode sortear
+
+        return Math.floor(Math.random() * maximo);
+
+
+    }
+    function atualizaTela(){
+        limpaTela();
+        xAleatorio = sorteiaPosicao(600);//aqui declaramos o maximo que pode chegar que é o limite do canvas
+        yAleatorio = sorteiaPosicao(400);
+        desenhaAlvo(xAleatorio, yAleatorio);// jogamos as variaveis aqui dentro que é o que vai vir sorteado 
+
+    }
+   
+    setInterval(atualizaTela, 100);
+
+    function dispara(evento){
+        
+        var x = evento.pageX - tela.offsetLeft; // esse comado é pra ele pegar o momento do click do mouse, e esse tela.offsetleft é pra ele considerar só a area do canvas
+        var y = evento.pageY - tela.offsetTop;// esse tbm
+        
+        //condição logica
+        if((x > xAleatorio - raio) // estou falando que x que é o evento click for maior que xaleatorio - raio, que ele dispara o alert
+        && (x < xAleatorio + raio) // estou falando que x que é o evento click for menor que xaleatorio - raio, que ele dispara o alert
+         && (y > yAleatorio - raio) // estou falando que y que é o evento click for maior que yaleatorio - raio, que ele dispara o alert
+          && (y < yAleatorio + raio)) // estou falando que y que é o evento click for menor que yaleatorio + raio, que ele dispara o alert 
+          {
+
+            alert("Você Acertou!!!");
+        }
+
+    }
+
+    tela.onclick = dispara;
+
+    </script>
